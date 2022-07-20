@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package tfapi;
+
+option go_package = "./;tfapi";
+
+service Telegraf {
+    rpc GetFile(PathRequest) returns (ContentResponse) {};
+    rpc GetDir(PathRequest) returns (FilesResponse) {};
+    rpc Update(ContentRequest) returns (CommonResponse) {};
+    rpc Touch(PathRequest) returns (CommonResponse) {};
+    rpc Delete(PathRequest) returns (CommonResponse) {};
+    rpc Exist(PathRequest) returns (CommonResponse) {};
+}
+message PathRequest {
+    // path不能为空
+    // @inject_tag: uri:"path" form:"path" validate:"ne="
+    string path = 1;
+}
+message ContentRequest {
+    // path不能为空
+    // @inject_tag: validate:"ne="
+    string path = 1;
+    string content = 2;
+}
+message CommonResponse {
+    int32 code = 1;
+    string message = 2;
+}
+message ContentResponse {
+    int32 code = 1;
+    string message = 2;
+    string content = 3;
+}
+message FilesResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated FileInfo files = 3;
+}
+message FileInfo {
+    string path = 1;
+}

@@ -1,0 +1,209 @@
+definitions:
+  tfapi.CommonResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  tfapi.ContentRequest:
+    properties:
+      content:
+        type: string
+      path:
+        description: |-
+          path不能为空
+          @inject_tag: validate:"ne="
+        type: string
+    type: object
+  tfapi.ContentResponse:
+    properties:
+      code:
+        type: integer
+      content:
+        type: string
+      message:
+        type: string
+    type: object
+  tfapi.PathRequest:
+    properties:
+      path:
+        description: |-
+          path不能为空
+          @inject_tag: uri:"path" form:"path" validate:"ne="
+        type: string
+    type: object
+info:
+  contact: {}
+  description: |-
+    xinagri telegraf server
+    错误代码
+    Success=20000,InternalServerError=50000,BadRequest=40000,Unauthorized=40001,ErrRecordNotFound=40002,UserNameOrPasswordIsWrong=41001,UserIsNotExist=41002,NoPermission=41003,TokenInvalid=41004,TokenExpired=41005,UserDisabled=41006
+  title: Telegraf API
+  version: 0.0.1
+paths:
+  /api/telegraf/delete:
+    delete:
+      consumes:
+      - application/json
+      description: 删除文件
+      parameters:
+      - description: 相对路径
+        in: query
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.CommonResponse'
+      summary: 删除文件
+      tags:
+      - telegraf
+  /api/telegraf/exist:
+    get:
+      consumes:
+      - application/json
+      description: 检查文件是否存在
+      parameters:
+      - description: 相对路径
+        in: query
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.CommonResponse'
+      summary: 检查文件是否存在
+      tags:
+      - telegraf
+  /api/telegraf/getDir:
+    get:
+      consumes:
+      - application/json
+      description: 获取文件目录下的文件路径
+      parameters:
+      - description: 相对路径
+        in: query
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.ContentResponse'
+      summary: 获取文件目录下的文件路径
+      tags:
+      - telegraf
+  /api/telegraf/getFile:
+    get:
+      consumes:
+      - application/json
+      description: 获取文件内容
+      parameters:
+      - description: 相对路径
+        in: query
+        name: path
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.ContentResponse'
+      summary: 获取文件内容
+      tags:
+      - telegraf
+  /api/telegraf/touch:
+    put:
+      consumes:
+      - application/json
+      description: 更新文件的访问时间和修改时间
+      parameters:
+      - description: 相对路径
+        in: body
+        name: path
+        required: true
+        schema:
+          $ref: '#/definitions/tfapi.PathRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.CommonResponse'
+      summary: 更新文件的访问时间和修改时间
+      tags:
+      - telegraf
+  /api/telegraf/update:
+    put:
+      consumes:
+      - application/json
+      description: 更新文件内容
+      parameters:
+      - description: 文件和文件内容
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/tfapi.ContentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/tfapi.CommonResponse'
+      summary: 更新文件内容
+      tags:
+      - telegraf
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"
