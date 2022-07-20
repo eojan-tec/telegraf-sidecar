@@ -15,6 +15,6 @@ COPY --from=builder /workspace/telegraf-sidecar ./
 COPY --from=builder /workspace/docs/swagger.json ./docs
 COPY --from=builder /workspace/docs/swagger.yaml ./docs
 
-EXPOSE 20007
+EXPOSE 48087
 
 ENTRYPOINT ./telegraf-sidecar
