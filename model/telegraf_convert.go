@@ -1,6 +1,6 @@
 package model
 
-import "codeup.aliyun.com/xinnong/telegraf-sidecar/tfapi"
+import "github.com/eojan-tec/telegraf-sidecar/tfapi"
 
 func FileInfoToPB(in FileInfo) *tfapi.FileInfo {
 	return &tfapi.FileInfo{

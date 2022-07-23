@@ -1,8 +1,8 @@
 package http
 
 import (
-	tfmodel "codeup.aliyun.com/xinnong/telegraf-sidecar/model"
-	"codeup.aliyun.com/xinnong/telegraf-sidecar/tfapi"
+	tfmodel "github.com/eojan-tec/telegraf-sidecar/model"
+	"github.com/eojan-tec/telegraf-sidecar/tfapi"
 	"github.com/gin-gonic/gin"
 	"github.com/nooocode/pkg/model"
 	"github.com/nooocode/pkg/utils/middleware"

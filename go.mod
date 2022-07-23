@@ -1,4 +1,4 @@
-module codeup.aliyun.com/xinnong/telegraf-sidecar
+module github.com/eojan-tec/telegraf-sidecar
 
 go 1.17
 

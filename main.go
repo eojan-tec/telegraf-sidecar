@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "codeup.aliyun.com/xinnong/telegraf-sidecar/docs"
-	"codeup.aliyun.com/xinnong/telegraf-sidecar/http"
-	"codeup.aliyun.com/xinnong/telegraf-sidecar/model"
 	_ "dubbo.apache.org/dubbo-go/v3/imports"
 	"fmt"
+	_ "github.com/eojan-tec/telegraf-sidecar/docs"
+	"github.com/eojan-tec/telegraf-sidecar/http"
+	"github.com/eojan-tec/telegraf-sidecar/model"
 	"github.com/gin-gonic/gin"
 	"github.com/nooocode/pkg/utils"
 	swaggerFiles "github.com/swaggo/files"

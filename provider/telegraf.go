@@ -1,9 +1,9 @@
 package provider
 
 import (
-	tfmodel "codeup.aliyun.com/xinnong/telegraf-sidecar/model"
-	"codeup.aliyun.com/xinnong/telegraf-sidecar/tfapi"
 	"context"
+	tfmodel "github.com/eojan-tec/telegraf-sidecar/model"
+	"github.com/eojan-tec/telegraf-sidecar/tfapi"
 	"github.com/nooocode/pkg/model"
 )
 
